@@ -1,0 +1,303 @@
+# =============================================================================
+# MEDITECH SOAR - GENERADOR DE DASHBOARD EJECUTIVO v3
+# Incluye: estado de resolución, escalados, KPIs de seguimiento
+# =============================================================================
+
+items_validos = [
+    x for x in _items
+    if x is not None and isinstance(x, dict) and "json" in x and x["json"]
+]
+
+items_priorizados = sorted(
+    items_validos,
+    key=lambda x: x["json"].get("ipc_score", 0),
+    reverse=True
+)
+
+# ─── CONTADORES KPI ───────────────────────────────────────────────────────────
+total_criticas        = 0
+total_altas           = 0
+total_escaladas       = 0
+total_no_resueltas    = 0
+total_en_progreso     = 0
+total_resueltas       = 0
+suma_riesgo_economico = 0.0
+filas_html            = ""
+
+for item in items_priorizados:
+    row = item["json"]
+
+    id_v       = row.get("id_vuln",               "N/A")
+    activo     = row.get("nombre_activo",          "Desconocido")
+    cvss       = float(row.get("cvss_base",        0))
+    score      = float(row.get("ipc_score",        0))
+    riesgo_eur = float(row.get("riesgo_financiero_eur", 0))
+    prioridad  = row.get("prioridad_soar",         "BAJA")
+    sla        = row.get("sla_remediacion",        "Pendiente")
+    notificar  = row.get("notificar_ciso",         False)
+    amenaza    = row.get("tiene_exploit",          "NO")
+    expo       = row.get("exposicion",             "INTERNA")
+    cumple     = row.get("cumplimiento",           "NO")
+    weapon     = row.get("weaponization",          "N/A")
+    estado     = row.get("estado",                 "NO_RESUELTA")
+    escalada   = row.get("escalada",               False)
+    motivo     = row.get("motivo_escalado",        "")
+
+    suma_riesgo_economico += riesgo_eur
+
+    # Contadores de prioridad
+    if prioridad in ("CRITICA", "CRITICA_ESCALADA"):
+        total_criticas += 1
+    elif prioridad == "ALTA":
+        total_altas += 1
+    if escalada:
+        total_escaladas += 1
+
+    # Contadores de estado
+    if estado == "RESUELTA":
+        total_resueltas += 1
+    elif estado == "EN_PROGRESO":
+        total_en_progreso += 1
+    else:
+        total_no_resueltas += 1
+
+    # ── Colores por prioridad ─────────────────────────────────────────────────
+    if prioridad == "CRITICA_ESCALADA":
+        color = "#c0392b"
+    elif prioridad == "CRITICA":
+        color = "#e74c3c"
+    elif prioridad == "ALTA":
+        color = "#e67e22"
+    elif prioridad == "MEDIA":
+        color = "#f39c12"
+    else:
+        color = "#7f8c8d"
+
+    # ── Colores por estado ────────────────────────────────────────────────────
+    if estado == "RESUELTA":
+        color_estado = "#27ae60"
+        icono_estado = "\u2705"
+    elif estado == "EN_PROGRESO":
+        color_estado = "#e67e22"
+        icono_estado = "\u23f3"
+    else:
+        color_estado = "#e74c3c"
+        icono_estado = "\u274c"
+
+    # ── Color weaponization ───────────────────────────────────────────────────
+    if weapon == "ALTA":
+        color_weapon = "#e74c3c"
+    elif weapon == "MEDIA":
+        color_weapon = "#e67e22"
+    else:
+        color_weapon = "#7f8c8d"
+
+    alerta = "\U0001f514 " if notificar else ""
+
+    # ── Banner de escalado ────────────────────────────────────────────────────
+    fila_escalado = ""
+    if escalada and motivo:
+        fila_escalado = f"""
+    <tr style="background:#fdf2f2;">
+        <td colspan="12" style="padding:6px 14px; font-size:11px;
+            color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+            \u26a0\ufe0f {motivo}
+        </td>
+    </tr>"""
+
+    filas_html += f"""
+    {fila_escalado}
+    <tr>
+        <td style="font-weight:bold; color:#2c3e50;">{alerta}{id_v}</td>
+        <td>{activo}</td>
+        <td style="text-align:center; color:#555;">{cvss:.1f}</td>
+        <td style="text-align:center; font-size:11px; color:#555;">{amenaza}</td>
+        <td style="text-align:center; font-size:11px; color:#555;">{expo}</td>
+        <td style="text-align:center; font-size:11px; color:#555;">{cumple}</td>
+        <td style="text-align:center; font-size:11px; color:{color_weapon}; font-weight:bold;">{weapon}</td>
+        <td style="text-align:center; font-weight:bold; color:{color};">{score:.2f}</td>
+        <td style="text-align:right; font-weight:bold; color:#27ae60;">{riesgo_eur:,.2f} \u20ac</td>
+        <td style="text-align:center;">
+            <span style="background:{color}; color:white; padding:4px 10px;
+                  border-radius:15px; font-size:11px; font-weight:bold;">{prioridad}</span>
+        </td>
+        <td style="text-align:center;">
+            <span style="background:{color_estado}; color:white; padding:4px 10px;
+                  border-radius:15px; font-size:11px; font-weight:bold;">
+                {icono_estado} {estado}
+            </span>
+        </td>
+        <td style="text-align:center; color:#555; font-size:12px;">{sla}</td>
+    </tr>"""
+
+# ─── BARRA DE PROGRESO ────────────────────────────────────────────────────────
+total_items     = len(items_priorizados)
+pct_resueltas   = round((total_resueltas    / total_items * 100) if total_items else 0, 1)
+pct_en_progreso = round((total_en_progreso  / total_items * 100) if total_items else 0, 1)
+pct_abiertas    = round((total_no_resueltas / total_items * 100) if total_items else 0, 1)
+
+html_template = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family:'Segoe UI',Arial,sans-serif; background:#f0f2f5;
+                margin:0; padding:30px; }}
+        .container {{ max-width:1500px; margin:auto; background:white; padding:40px;
+                      border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.08); }}
+        .header {{ border-bottom:3px solid #2c3e50; margin-bottom:30px; padding-bottom:15px; }}
+        h1 {{ color:#2c3e50; margin:0; font-size:26px; }}
+        .subtitle {{ color:#7f8c8d; margin:6px 0 0; font-size:13px; }}
+        .kpi-row {{ display:flex; gap:15px; margin-bottom:20px; }}
+        .card {{ flex:1; padding:20px; border-radius:12px; text-align:center;
+                 color:white; box-shadow:0 4px 15px rgba(0,0,0,0.12); }}
+        .card h2 {{ margin:0; font-size:34px; font-weight:700; }}
+        .card p  {{ margin:6px 0 0; font-size:11px; font-weight:600;
+                    opacity:0.9; letter-spacing:0.5px; text-transform:uppercase; }}
+        .metodologia {{ background:#eaf4fb; border-left:4px solid #3498db;
+                        padding:10px 16px; border-radius:4px;
+                        margin-bottom:20px; font-size:12px; color:#2c3e50; }}
+        .progress-wrap {{ background:#f8f9fa; border-radius:10px; padding:16px 20px;
+                          margin-bottom:25px; border:1px solid #eee; }}
+        .progress-title {{ font-size:12px; font-weight:700; color:#7f8c8d;
+                           text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }}
+        .progress-bar-bg {{ background:#eee; border-radius:20px; height:22px;
+                            overflow:hidden; display:flex; }}
+        .progress-seg {{ height:100%; display:flex; align-items:center;
+                         justify-content:center; font-size:11px;
+                         font-weight:700; color:white; }}
+        .section-title {{ font-size:12px; color:#7f8c8d; font-weight:700;
+                          text-transform:uppercase; letter-spacing:1px;
+                          margin-bottom:12px; }}
+        table {{ width:100%; border-collapse:collapse; font-size:13px; }}
+        th {{ background:#f8f9fa; padding:11px 13px; text-align:left;
+              color:#7f8c8d; font-size:11px; text-transform:uppercase;
+              letter-spacing:0.7px; border-bottom:2px solid #eee; }}
+        td {{ padding:11px 13px; border-bottom:1px solid #f0f0f0; }}
+        tr:hover td {{ background:#fafbfc; }}
+        .footer {{ margin-top:25px; font-size:11px;
+                   color:#bdc3c7; text-align:center; line-height:1.8; }}
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>&#x1F6E1;&#xFE0F; MediTech SOAR &mdash; Informe Ejecutivo de Vulnerabilidades</h1>
+        <p class="subtitle">
+            An&aacute;lisis de Riesgo Contextual (IPC) &nbsp;&bull;&nbsp; Metodolog&iacute;a TFM &nbsp;&bull;&nbsp;
+            Score = CVSS &times; F<sub>activo</sub> &times; F<sub>amenaza</sub> &times;
+            F<sub>exposicion</sub> &times; F<sub>cumplimiento</sub> &times; F<sub>weaponization</sub>
+        </p>
+    </div>
+
+    <div class="metodologia">
+        &#x2139;&#xFE0F;&nbsp;
+        <strong>Umbrales TFM (Secci&oacute;n 3.5):</strong>
+        CRITICA &ge; 35 &nbsp;|&nbsp; ALTA 20&ndash;34.9 &nbsp;|&nbsp;
+        MEDIA 10&ndash;19.9 &nbsp;|&nbsp; BAJA &lt; 10 &nbsp;&mdash;&nbsp;
+        <strong>Score m&aacute;x. te&oacute;rico: 81.9</strong> &nbsp;&mdash;&nbsp;
+        <strong>Riesgo:</strong> SLE ajustado por madurez de exploit (Secci&oacute;n 3.3)
+    </div>
+
+    <div class="kpi-row">
+        <div class="card" style="background:#c0392b;">
+            <h2>{total_escaladas}</h2>
+            <p>&#x1F6A8; Escaladas al CISO</p>
+        </div>
+        <div class="card" style="background:#e74c3c;">
+            <h2>{total_criticas}</h2>
+            <p>CR&Iacute;TICAS (&ge; 35)</p>
+        </div>
+        <div class="card" style="background:#e67e22;">
+            <h2>{total_altas}</h2>
+            <p>ALTAS (20&ndash;34.9)</p>
+        </div>
+        <div class="card" style="background:#27ae60;">
+            <h2>{suma_riesgo_economico:,.0f} &euro;</h2>
+            <p>Riesgo Econ&oacute;mico Total (SLE)</p>
+        </div>
+        <div class="card" style="background:#2c3e50;">
+            <h2>{total_items}</h2>
+            <p>Total Vulnerabilidades</p>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="card" style="background:#e74c3c;">
+            <h2>{total_no_resueltas}</h2>
+            <p>&#x274C; No Resueltas</p>
+        </div>
+        <div class="card" style="background:#e67e22;">
+            <h2>{total_en_progreso}</h2>
+            <p>&#x23F3; En Progreso</p>
+        </div>
+        <div class="card" style="background:#27ae60;">
+            <h2>{total_resueltas}</h2>
+            <p>&#x2705; Resueltas</p>
+        </div>
+        <div class="card" style="background:#8e44ad;">
+            <h2>{pct_resueltas}%</h2>
+            <p>Tasa de Resoluci&oacute;n</p>
+        </div>
+    </div>
+
+    <div class="progress-wrap">
+        <div class="progress-title">Progreso global de remediaci&oacute;n</div>
+        <div class="progress-bar-bg">
+            <div class="progress-seg"
+                 style="width:{pct_resueltas}%; background:#27ae60;">
+                {pct_resueltas}%
+            </div>
+            <div class="progress-seg"
+                 style="width:{pct_en_progreso}%; background:#e67e22;">
+                {pct_en_progreso}%
+            </div>
+            <div class="progress-seg"
+                 style="width:{pct_abiertas}%; background:#e74c3c;">
+                {pct_abiertas}%
+            </div>
+        </div>
+        <div style="display:flex; gap:20px; margin-top:8px; font-size:11px; color:#7f8c8d;">
+            <span>&#x25A0; <span style="color:#27ae60;">Resueltas ({total_resueltas})</span></span>
+            <span>&#x25A0; <span style="color:#e67e22;">En Progreso ({total_en_progreso})</span></span>
+            <span>&#x25A0; <span style="color:#e74c3c;">No Resueltas ({total_no_resueltas})</span></span>
+        </div>
+    </div>
+
+    <div class="section-title">Vulnerabilidades priorizadas por Score IPC</div>
+    <table>
+        <thead>
+            <tr>
+                <th>CVE / ID</th>
+                <th>Activo Afectado</th>
+                <th style="text-align:center;">CVSS</th>
+                <th style="text-align:center;">Exploit</th>
+                <th style="text-align:center;">Exposici&oacute;n</th>
+                <th style="text-align:center;">GDPR</th>
+                <th style="text-align:center;">Weapon.</th>
+                <th style="text-align:center;">IPC Score</th>
+                <th style="text-align:right;">Riesgo SLE</th>
+                <th style="text-align:center;">Prioridad</th>
+                <th style="text-align:center;">Estado</th>
+                <th style="text-align:center;">SLA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {filas_html}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Generado autom&aacute;ticamente por la plataforma SOAR de MediTech Solutions<br>
+        &#x1F514; = Notificaci&oacute;n CISO &nbsp;&bull;&nbsp;
+        &#x26A0;&#xFE0F; = Vulnerabilidad escalada &nbsp;&bull;&nbsp;
+        Weapon.: ALTA (x1.5) | MEDIA&#x2013;PoC (x1.2) | BAJA&#x2013;Te&oacute;rico (x1.0)<br>
+        Riesgo SLE = Coste_24h &times; m&iacute;n(Score / 54.6, cap_exploit)
+    </div>
+
+</div>
+</body>
+</html>"""
+
+return [{"json": {"html_report": html_template}}]
