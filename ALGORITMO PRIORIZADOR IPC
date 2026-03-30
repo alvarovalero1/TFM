@@ -1,0 +1,239 @@
+# =============================================================================
+# MEDITECH SOAR - ALGORITMO PRIORIZADOR IPC v2.1
+# =============================================================================
+
+F_ACTIVO = {
+    "CRITICO": 1.5,
+    "ALTO":    1.2,
+    "MEDIO":   1.0,
+    "BAJO":    0.5
+}
+F_AMENAZA = {
+    "SI":  2.0,
+    "POC": 1.5,
+    "NO":  1.0
+}
+F_EXPOSICION = {
+    "EXTERNA":    1.3,
+    "DMZ":        1.1,
+    "INTERNA":    1.0,
+    "LAB":        0.8,
+    "SEGMENTADA": 0.8
+}
+F_CUMPLIMIENTO = {
+    "SI": 1.4,
+    "NO": 1.0
+}
+F_WEAPONIZATION = {
+    "ALTA":  1.5,
+    "MEDIA": 1.2,
+    "BAJA":  1.0
+}
+
+# ── NUEVO FACTOR ──────────────────────────────────────────────────────────────
+# F_ESTADO: penaliza vulnerabilidades no resueltas incrementando su Score IPC.
+# Una vuln sin remediar acumula exposición real creciente → mayor criticidad.
+F_ESTADO = {
+    "RESUELTA":    0.7,   # Corregida: criticidad residual reducida
+    "EN_PROGRESO": 1.0,   # En tratamiento: mantiene prioridad base
+    "NO_RESUELTA": 1.3,   # Sin remediar: incremento del 30% por persistencia
+    # Aliases normalizados
+    "ABIERTA":     1.3,
+    "OPEN":        1.3,
+    "PENDIENTE":   1.3,
+    "REABIERTA":   1.3,
+}
+
+COSTE_24H = {
+    "CRITICO": 120000,
+    "ALTO":     36000,
+    "MEDIO":     2400,
+    "BAJO":         0
+}
+
+# Score máximo teórico con 7 factores:
+# CVSS 10 × 1.5 × 2.0 × 1.3 × 1.4 × 1.5 × 1.3 = 106.47
+SCORE_NORMALIZADOR = 106.47
+
+CAP_PROBABILIDAD = {
+    "SI":  1.0,
+    "POC": 0.5,
+    "NO":  0.1
+}
+
+UMBRAL_CRITICO = 35
+UMBRAL_ALTO    = 20
+UMBRAL_MEDIO   = 10
+
+# ─── UTILIDADES ───────────────────────────────────────────────────────────────
+
+def normalize(s):
+    if s is None:
+        return ""
+    s = str(s).upper().strip()
+    pairs = [
+        ("\u00C1","A"),("\u00E1","A"),("\u00C0","A"),("\u00E0","A"),
+        ("\u00C9","E"),("\u00E9","E"),("\u00C8","E"),("\u00E8","E"),
+        ("\u00CD","I"),("\u00ED","I"),("\u00CC","I"),("\u00EC","I"),
+        ("\u00D3","O"),("\u00F3","O"),("\u00D2","O"),("\u00F2","O"),
+        ("\u00DA","U"),("\u00FA","U"),("\u00D9","U"),("\u00F9","U"),
+        ("\u00D1","N"),("\u00F1","N"),("\u00C7","C"),("\u00E7","C"),
+    ]
+    for accented, base in pairs:
+        s = s.replace(accented, base)
+    return s
+
+def get_flexible(row, keys, default):
+    norm_map = {}
+    for k, v in row.items():
+        norm_map[normalize(k)] = v
+    for key in keys:
+        if key in row and row[key] not in (None, "", "None"):
+            return row[key]
+        norm_key = normalize(key)
+        if norm_key in norm_map and norm_map[norm_key] not in (None, "", "None"):
+            return norm_map[norm_key]
+    return default
+
+# =============================================================================
+# PRIMERA ITERACIÓN — Cálculo IPC estándar con 7 factores (incluye F_estado)
+# =============================================================================
+
+resultados_primera = []
+
+for item in _items:
+    if item is None or not isinstance(item, dict) or "json" not in item:
+        continue
+    row = item["json"]
+    if not row:
+        continue
+
+    id_v    = get_flexible(row, ["id_vuln", "cve_id", "CVE", "cve", "ID"],                   "N/A")
+    activo  = get_flexible(row, ["nombre_activo", "asset_name", "asset", "Asset"],            "Desconocido")
+    tipo    = get_flexible(row, ["tipo_activo", "criticidad", "asset_type"],                  "MEDIO")
+    cvss_r  = get_flexible(row, ["cvss_base", "cvss", "CVSS", "score"],                      "0")
+    amenaza = get_flexible(row, ["tiene_exploit", "exploit", "amenaza"],                     "NO")
+    expo    = get_flexible(row, ["exposicion", "exposure", "zona_red"],                      "INTERNA")
+    cumple  = get_flexible(row, ["cumplimiento", "datos_regulados", "gdpr"],                 "NO")
+    weapon  = get_flexible(row, ["weaponization", "weaponizado", "madurez_exploit"],         "BAJA")
+    estado  = get_flexible(row, ["estado", "status", "resuelta", "resolucion", "estado_vuln"], "NO_RESUELTA")
+
+    try:
+        cvss = float(cvss_r)
+        cvss = max(0.0, min(10.0, cvss))
+    except (ValueError, TypeError):
+        cvss = 0.0
+
+    tipo_norm    = normalize(tipo)
+    amenaza_norm = normalize(amenaza)
+    expo_norm    = normalize(expo)
+    cumple_norm  = normalize(cumple)
+    weapon_norm  = normalize(weapon)
+    estado_norm  = normalize(estado)
+
+    f_activo  = F_ACTIVO.get(tipo_norm,          1.0)
+    f_amenaza = F_AMENAZA.get(amenaza_norm,       1.0)
+    f_expo    = F_EXPOSICION.get(expo_norm,       1.0)
+    f_cumple  = F_CUMPLIMIENTO.get(cumple_norm,   1.0)
+    f_weapon  = F_WEAPONIZATION.get(weapon_norm,  1.0)
+    # ── F_ESTADO: entra en la fórmula base, no solo en el escalado ──
+    f_estado  = F_ESTADO.get(estado_norm, 1.3)  # default conservador: NO_RESUELTA
+
+    # Fórmula IPC completa con 7 factores
+    ipc_score = round(
+        cvss * f_activo * f_amenaza * f_expo * f_cumple * f_weapon * f_estado,
+        2
+    )
+
+    coste_24h   = COSTE_24H.get(tipo_norm, 0)
+    cap         = CAP_PROBABILIDAD.get(amenaza_norm, 0.1)
+    factor_prob = min(ipc_score / SCORE_NORMALIZADOR, cap)
+    riesgo_eur  = round(coste_24h * factor_prob, 2)
+
+    if ipc_score >= UMBRAL_CRITICO:
+        prioridad = "CRITICA"
+        sla       = "24 Horas"
+        notificar = True
+    elif ipc_score >= UMBRAL_ALTO:
+        prioridad = "ALTA"
+        sla       = "7 Dias"
+        notificar = False
+    elif ipc_score >= UMBRAL_MEDIO:
+        prioridad = "MEDIA"
+        sla       = "30 Dias"
+        notificar = False
+    else:
+        prioridad = "BAJA"
+        sla       = "Segun disponibilidad"
+        notificar = False
+
+    resultados_primera.append({
+        "id_vuln":               id_v,
+        "nombre_activo":         activo,
+        "tipo_activo":           tipo_norm,
+        "cvss_base":             cvss,
+        "tiene_exploit":         amenaza_norm,
+        "exposicion":            expo_norm,
+        "cumplimiento":          cumple_norm,
+        "weaponization":         weapon_norm,
+        "estado":                estado_norm,
+        "f_activo":              f_activo,
+        "f_amenaza":             f_amenaza,
+        "f_exposicion":          f_expo,
+        "f_cumplimiento":        f_cumple,
+        "f_weaponization":       f_weapon,
+        "f_estado":              f_estado,          # ← nuevo campo en output
+        "ipc_score":             ipc_score,
+        "factor_probabilidad":   round(factor_prob, 4),
+        "riesgo_financiero_eur": riesgo_eur,
+        "prioridad_soar":        prioridad,
+        "sla_remediacion":       sla,
+        "notificar_ciso":        notificar,
+        "escalada":              False,
+        "motivo_escalado":       ""
+    })
+
+# =============================================================================
+# SEGUNDA ITERACIÓN — Escalado al CISO por estado abierto
+# (complementa el Score: el IPC ya refleja el estado, aquí se gestiona la
+#  notificación y la etiqueta operativa para el flujo de alertas)
+# =============================================================================
+
+ESTADOS_ABIERTOS = {"NO_RESUELTA", "ABIERTA", "OPEN", "PENDIENTE",
+                    "EN_PROGRESO", "REABIERTA", "NO", ""}
+
+results = []
+
+for vuln in resultados_primera:
+    estado_norm = vuln["estado"]
+    prioridad   = vuln["prioridad_soar"]
+    escalada    = False
+    motivo      = ""
+
+    if estado_norm in ESTADOS_ABIERTOS:
+
+        if prioridad == "CRITICA":
+            vuln["prioridad_soar"]  = "CRITICA_ESCALADA"
+            vuln["sla_remediacion"] = "INMEDIATO"
+            vuln["notificar_ciso"]  = True
+            escalada = True
+            motivo   = "Vulnerabilidad CRITICA sin resolver — intervención inmediata requerida"
+
+        elif prioridad == "ALTA":
+            vuln["prioridad_soar"]  = "CRITICA"
+            vuln["sla_remediacion"] = "24 Horas"
+            vuln["notificar_ciso"]  = True
+            escalada = True
+            motivo   = "Vulnerabilidad ALTA sin resolver — escalada a CRITICA por vencimiento de SLA"
+
+        else:
+            vuln["notificar_ciso"] = True
+            escalada = True
+            motivo   = "Vulnerabilidad " + prioridad + " sin resolver — notificación preventiva al CISO"
+
+    vuln["escalada"]        = escalada
+    vuln["motivo_escalado"] = motivo
+
+    results.append({"json": vuln})
+
+return results
