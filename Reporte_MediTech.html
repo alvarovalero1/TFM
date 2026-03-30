@@ -1,0 +1,2755 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family:'Segoe UI',Arial,sans-serif; background:#f0f2f5;
+                    margin:0; padding:30px; }
+            .container { max-width:1600px; margin:auto; background:white; padding:40px;
+                          border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.08); }
+            .header { border-bottom:3px solid #2c3e50; margin-bottom:30px; padding-bottom:15px; }
+            h1 { color:#2c3e50; margin:0; font-size:26px; }
+            .subtitle { color:#7f8c8d; margin:6px 0 0; font-size:13px; }
+            .kpi-row { display:flex; gap:15px; margin-bottom:20px; flex-wrap:wrap; }
+            .card { flex:1; min-width:140px; padding:20px; border-radius:12px; text-align:center;
+                     color:white; box-shadow:0 4px 15px rgba(0,0,0,0.12); }
+            .card h2 { margin:0; font-size:34px; font-weight:700; }
+            .card p  { margin:6px 0 0; font-size:11px; font-weight:600;
+                        opacity:0.9; letter-spacing:0.5px; text-transform:uppercase; }
+            .metodologia { background:#eaf4fb; border-left:4px solid #3498db;
+                            padding:10px 16px; border-radius:4px;
+                            margin-bottom:20px; font-size:12px; color:#2c3e50; }
+            .progress-wrap { background:#f8f9fa; border-radius:10px; padding:16px 20px;
+                              margin-bottom:25px; border:1px solid #eee; }
+            .progress-title { font-size:12px; font-weight:700; color:#7f8c8d;
+                               text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+            .progress-bar-bg { background:#eee; border-radius:20px; height:22px;
+                                overflow:hidden; display:flex; }
+            .progress-seg { height:100%; display:flex; align-items:center;
+                             justify-content:center; font-size:11px;
+                             font-weight:700; color:white; }
+            .section-title { font-size:12px; color:#7f8c8d; font-weight:700;
+                              text-transform:uppercase; letter-spacing:1px;
+                              margin-bottom:12px; }
+            table { width:100%; border-collapse:collapse; font-size:13px; }
+            th { background:#f8f9fa; padding:11px 13px; text-align:left;
+                  color:#7f8c8d; font-size:11px; text-transform:uppercase;
+                  letter-spacing:0.7px; border-bottom:2px solid #eee; }
+            td { padding:11px 13px; border-bottom:1px solid #f0f0f0; }
+            tr:hover td { background:#fafbfc; }
+            .footer { margin-top:25px; font-size:11px;
+                       color:#bdc3c7; text-align:center; line-height:1.8; }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+
+        <div class="header">
+            <h1>&#x1F6E1;&#xFE0F; MediTech SOAR &mdash; Informe Ejecutivo de Vulnerabilidades</h1>
+            <p class="subtitle">
+                An&aacute;lisis de Riesgo Contextual (IPC) &nbsp;&bull;&nbsp; Metodolog&iacute;a TFM &nbsp;&bull;&nbsp;
+                Score = CVSS &times; F<sub>activo</sub> &times; F<sub>amenaza</sub> &times;
+                F<sub>exposicion</sub> &times; F<sub>cumplimiento</sub> &times;
+                F<sub>weaponization</sub> &times; F<sub>estado</sub>
+            </p>
+        </div>
+
+        <div class="metodologia">
+            &#x2139;&#xFE0F;&nbsp;
+            <strong>Umbrales TFM (Secci&oacute;n 4.5):</strong>
+            CR&Iacute;TICA &ge; 35 &nbsp;|&nbsp; ALTA 20&ndash;34.9 &nbsp;|&nbsp;
+            MEDIA 10&ndash;19.9 &nbsp;|&nbsp; BAJA &lt; 10
+            &nbsp;&mdash;&nbsp;
+            <strong>Score m&aacute;x. te&oacute;rico: 106.47</strong>
+            &nbsp;&mdash;&nbsp;
+            <strong>F<sub>estado</sub>:</strong> NO_RESUELTA &times;1.3 &nbsp;|&nbsp;
+            EN_PROGRESO &times;1.0 &nbsp;|&nbsp; RESUELTA: excluida del motor
+        </div>
+
+        <div class="kpi-row">
+            <div class="card" style="background:#c0392b;">
+                <h2>31</h2>
+                <p>&#x1F6A8; Escaladas al CISO</p>
+            </div>
+            <div class="card" style="background:#e74c3c;">
+                <h2>31</h2>
+                <p>CR&Iacute;TICAS (&ge; 35)</p>
+            </div>
+            <div class="card" style="background:#e67e22;">
+                <h2>11</h2>
+                <p>ALTAS (20&ndash;34.9)</p>
+            </div>
+            <div class="card" style="background:#27ae60;">
+                <h2>1,305,158 &euro;</h2>
+                <p>Riesgo Econ&oacute;mico Total (SLE)</p>
+            </div>
+            <div class="card" style="background:#2c3e50;">
+                <h2>100</h2>
+                <p>Total Vulnerabilidades</p>
+            </div>
+        </div>
+
+        <div class="kpi-row">
+            <div class="card" style="background:#e74c3c;">
+                <h2>33</h2>
+                <p>&#x274C; No Resueltas</p>
+            </div>
+            <div class="card" style="background:#e67e22;">
+                <h2>29</h2>
+                <p>&#x23F3; En Progreso</p>
+            </div>
+            <div class="card" style="background:#27ae60;">
+                <h2>38</h2>
+                <p>&#x2705; Resueltas</p>
+            </div>
+            <div class="card" style="background:#8e44ad;">
+                <h2>38.0%</h2>
+                <p>Tasa de Resoluci&oacute;n</p>
+            </div>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-title">Progreso global de remediaci&oacute;n</div>
+            <div class="progress-bar-bg">
+                <div class="progress-seg"
+                     style="width:38.0%; background:#27ae60;">
+                    38.0%
+                </div>
+                <div class="progress-seg"
+                     style="width:29.0%; background:#e67e22;">
+                    29.0%
+                </div>
+                <div class="progress-seg"
+                     style="width:33.0%; background:#e74c3c;">
+                    33.0%
+                </div>
+            </div>
+            <div style="display:flex; gap:20px; margin-top:8px; font-size:11px; color:#7f8c8d;">
+                <span>&#x25A0; <span style="color:#27ae60;">Resueltas (38)</span></span>
+                <span>&#x25A0; <span style="color:#e67e22;">En Progreso (29)</span></span>
+                <span>&#x25A0; <span style="color:#e74c3c;">No Resueltas (33)</span></span>
+            </div>
+        </div>
+
+        <div class="section-title">Vulnerabilidades priorizadas por Score IPC</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>CVE / ID</th>
+                    <th>Activo Afectado</th>
+                    <th style="text-align:center;">CVSS</th>
+                    <th style="text-align:center;">Exploit</th>
+                    <th style="text-align:center;">Exposici&oacute;n</th>
+                    <th style="text-align:center;">GDPR</th>
+                    <th style="text-align:center;">Weapon.</th>
+                    <th style="text-align:center;">F<sub>estado</sub></th>
+                    <th style="text-align:center;">IPC Score</th>
+                    <th style="text-align:right;">Riesgo SLE</th>
+                    <th style="text-align:center;">Prioridad</th>
+                    <th style="text-align:center;">Estado</th>
+                    <th style="text-align:center;">SLA</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 106.47 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-portal-pacientes</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">106.47</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">120,000.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 90.09 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>proxy-his-ext</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">90.09</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">101,538.46 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 83.47 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>mail-gateway-01</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">83.47</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">28,223.16 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 76.05 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-pacs-ext-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">76.05</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">85,714.29 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 65.52 ≥ 35 · Exploit SI · Exposición LAB · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-bbdd-staging</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">65.52</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">73,846.15 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 65.52 ≥ 35 · Exploit SI · Exposición LAB · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-bbdd-staging-02</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">65.52</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">73,846.15 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 64.21 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-directorio-activo-02</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">64.21</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">21,710.90 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 64.21 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>vpn-gateway-01</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">64.21</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">21,710.90 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 61.74 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-backup-critico</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">61.74</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">69,585.80 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 60.84 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-web-corporativo-02</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">60.84</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">20,571.43 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 59.62 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-web-corporativo</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">59.62</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">20,158.92 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 59.62 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-api-externa</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">59.62</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">20,158.92 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 58.5 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-bbdd-principal</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">58.50</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">65,934.07 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 58.5 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>dc-meditech-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">58.50</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">65,934.07 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 53.51 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>ws-usuario-clinico-02</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">53.51</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">1,206.20 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 51.48 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-proxy-inverso</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">51.48</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">17,406.59 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 49.14 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2023-4966</td>
+            <td>api-gateway-prod</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">49.14</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">55,384.62 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 45.86 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-directorio-activo</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">45.86</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">15,506.34 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 45.86 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-erp-interno</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">45.86</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">15,506.34 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 45.28 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-dns-ext</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">45.28</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">1,020.68 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 45.28 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-dns-ext-02</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">45.28</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">1,020.68 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 45.0 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>srv-his-core</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">45.00</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">50,718.51 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 43.24 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2023-4966</td>
+            <td>smtp-relay-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">43.24</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">14,620.46 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 42.81 ≥ 35 · Exploit SI · Exposición LAB · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>ws-lab-usuario-01</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">42.81</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">965.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 42.04 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2024-3400</td>
+            <td>srv-proxy-dmz</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">42.04</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">947.65 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 42.0 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>ws-admin-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">42.00</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">946.75 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 39.0 ≥ 35 · Exploit SI · Exposición EXTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2021-44228</td>
+            <td>cms-meditech-web</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">39.00</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">879.12 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 38.61 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2023-4966</td>
+            <td>lb-critico-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">38.61</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">43,516.48 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 38.61 ≥ 35 · Exploit SI · Exposición DMZ · Sin resolver (NO_RESUELTA)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2023-4966</td>
+            <td>srv-his-dmz-01-02</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">38.61</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">43,516.48 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 38.33 ≥ 35 · Exploit POC · Exposición EXTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2022-30190</td>
+            <td>srv-portal-pacientes-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">38.33</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">43,200.90 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr style="background:#fdf2f2;">
+            <td colspan="13" style="padding:6px 14px; font-size:11px;
+                color:#c0392b; font-style:italic; border-bottom:1px solid #f5c6c6;">
+                ⚠️ Score IPC 37.8 ≥ 35 · Exploit SI · Exposición INTERNA · Sin resolver (EN_PROGRESO)
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">🔔 CVE-2023-4966</td>
+            <td>srv-ehr-prod</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#c0392b;">37.80</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">42,603.55 €</td>
+            <td style="text-align:center;">
+                <span style="background:#c0392b; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">CRITICA_ESCALADA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Inmediato</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-impresion</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">32.76</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">738.46 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-ehr-test-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">30.66</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">34,556.21 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-web-informativo-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">25.55</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">575.94 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-dev-alto</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">24.19</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">8,179.21 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-preproduccion-01-02</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">24.19</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">8,179.21 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>lab-critico-01-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">23.59</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">26,587.77 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-his-dmz-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">23.17</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">26,114.40 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-erp-interno-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">21.90</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">7,404.90 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-directorio-activo-03</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">21.60</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">7,303.47 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>vm-test-medio</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">20.16</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">454.44 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>dev-workstation-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#e67e22;">20.16</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">454.44 €</td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">ALTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">7 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>relay-medio-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">19.80</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">446.32 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>impresora-red-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">19.50</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-demo-publico</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">19.50</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>blog-corporativo</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">18.25</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">411.38 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-ficheros-dpto</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">16.85</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">5,697.38 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-ehr-test</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">16.85</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">18,991.27 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>sandbox-ext-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">12.78</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-ficheros-dpto-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">11.79</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">3,600.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>lab-aislado-01-03</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#f39c12;">10.08</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#f39c12; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">MEDIA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">30 Días</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-intranet</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">9.83</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">221.58 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>vm-test-bajo</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">9.36</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-proxy-inverso-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">9.27</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">3,134.40 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-obsoleto-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">9.13</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-his-pre-prod</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">8.42</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">9,490.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-lab-medio</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">7.86</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">177.18 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-newsletter</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">7.02</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">158.24 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-monitoreo-soc</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">6.48</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">2,191.04 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-monitoreo-soc-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">6.48</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">2,191.04 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-test-ext-01-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">1.3</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">6.39</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e74c3c; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ❌ NO_RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>sandbox-local-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">1</td>
+            <td style="text-align:center; font-weight:bold; color:#7f8c8d;">5.62</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">0.00 €</td>
+            <td style="text-align:center;">
+                <span style="background:#7f8c8d; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">BAJA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#e67e22; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ⏳ EN_PROGRESO
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">Según disponibilidad</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>ws-usuario-clinico</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-web-informativo</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>lab-aislado-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-his-prod-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>ws-invitado-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-preproduccion-01</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-qa-alto-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-balanceador-01</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>lab-critico-01</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-test-dmz-01</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-test-ext-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2024-3400</td>
+            <td>lab-pentest-srv</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>dev-lab-bajo-01</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>vm-sandbox-dmz</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-honeypot-dmz</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-his-prod-01-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>lab-dmz-bajo</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>lab-aislado-01-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-his-pre-prod-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>vm-test-bajo-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>honeypot-ext-01</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-pacs-ext-01-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2024-3400</td>
+            <td>waf-his-prod</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>srv-ntp-dmz</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-ad-principal</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2024-3400</td>
+            <td>srv-sftp-partners</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>api-gateway-prod-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-proxy-dmz-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">DMZ</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>sandbox-ext-01-02</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-demo-publico-02</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>cms-meditech-web-02</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2024-3400</td>
+            <td>sandbox-local-01-02</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2024-3400</td>
+            <td>dev-lab-bajo-01-02</td>
+            <td style="text-align:center; color:#555;">9.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2022-30190</td>
+            <td>srv-videoconf</td>
+            <td style="text-align:center; color:#555;">7.8</td>
+            <td style="text-align:center; font-size:11px; color:#555;">POC</td>
+            <td style="text-align:center; font-size:11px; color:#555;">INTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-4966</td>
+            <td>srv-newsletter-02</td>
+            <td style="text-align:center; color:#555;">7.5</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e67e22; font-weight:bold;">MEDIA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>srv-api-externa-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2023-24880</td>
+            <td>honeypot-ext-01-02</td>
+            <td style="text-align:center; color:#555;">5.4</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#555;">EXTERNA</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#7f8c8d; font-weight:bold;">BAJA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight:bold; color:#2c3e50;">CVE-2021-44228</td>
+            <td>ws-lab-usuario-01-02</td>
+            <td style="text-align:center; color:#555;">10.0</td>
+            <td style="text-align:center; font-size:11px; color:#555;">SI</td>
+            <td style="text-align:center; font-size:11px; color:#555;">LAB</td>
+            <td style="text-align:center; font-size:11px; color:#555;">NO</td>
+            <td style="text-align:center; font-size:11px; color:#e74c3c; font-weight:bold;">ALTA</td>
+            <td style="text-align:center; font-size:11px; color:#27ae60; font-weight:bold;">None</td>
+            <td style="text-align:center; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:right; font-weight:bold; color:#27ae60;">—</td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">RESUELTA</span>
+            </td>
+            <td style="text-align:center;">
+                <span style="background:#27ae60; color:white; padding:4px 10px;
+                      border-radius:15px; font-size:11px; font-weight:bold;">
+                    ✅ RESUELTA
+                </span>
+            </td>
+            <td style="text-align:center; color:#555; font-size:12px;">—</td>
+        </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            Generado autom&aacute;ticamente por la plataforma SOAR de MediTech Solutions<br>
+            &#x1F514; = Notificaci&oacute;n CISO &nbsp;&bull;&nbsp;
+            &#x26A0;&#xFE0F; = Vulnerabilidad escalada al CISO (CR&Iacute;TICA sin resolver)<br>
+            F<sub>estado</sub>: NO_RESUELTA (&times;1.3) | EN_PROGRESO (&times;1.0) | RESUELTA: excluida del motor &nbsp;&bull;&nbsp;
+            Score m&aacute;x. te&oacute;rico: 106.47 &nbsp;&bull;&nbsp;
+            SLE = Coste_24h &times; m&iacute;n(Score / 106.47, cap_exploit)
+        </div>
+
+    </div>
+    </body>
+    </html>
